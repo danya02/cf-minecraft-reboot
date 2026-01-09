@@ -1,17 +1,25 @@
+import { getStatus } from "./contrib/status";
+
 export default {
+	// async check_server(env: Env) {
+	// 	const serverHost = env.MINECRAFT_SERVER;
+
+	// 	// Fetch server status via API
+	// 	const headers = new Headers();
+	// 	headers.set("Content-Type", "application/json");
+	// 	headers.set("User-Agent", "cf-minecraft-reboot from threeforths.uk (github.com/danya02/cf-minecraft-reboot)",);
+	// 	const statusResponse = await fetch(`https://api.mcsrvstat.us/2/${serverHost}`, {
+	// 		method: "GET",
+	// 		headers: headers,
+	// 	});
+	// 	const status: {online: boolean, players: {online: number}} = await statusResponse.json();
+	// 	console.log(status);
+	// 	return status;
+	// },
+
 	async check_server(env: Env) {
 		const serverHost = env.MINECRAFT_SERVER;
-
-		// Fetch server status via API
-		const headers = new Headers();
-		headers.set("Content-Type", "application/json");
-		headers.set("User-Agent", "cf-minecraft-reboot from threeforths.uk (github.com/danya02/cf-minecraft-reboot)",);
-		const statusResponse = await fetch(`https://api.mcsrvstat.us/2/${serverHost}`, {
-			method: "GET",
-			headers: headers,
-		});
-		const status: {online: boolean, players: {online: number}} = await statusResponse.json();
-		console.log(status);
+		const status = await getStatus(serverHost);
 		return status;
 	},
 
